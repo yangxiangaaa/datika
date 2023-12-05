@@ -1,0 +1,80 @@
+body{
+
+    color: #333333!important;
+  
+    font-family: "微软雅黑"!important;
+  
+    font-size: 14px;
+  
+}
+pre{
+    margin-bottom: 0px;
+    color: #000000!important;
+    font-family: "微软雅黑"!important;
+    font-size: 14px;
+    white-space: pre-wrap!important;
+    word-wrap: break-word!important;
+    // white-space:normal!important;
+}
+
+//外层操作按钮基础样式
+[class^=btn-style-2]{
+    display: inline-block;
+    color: #ffffff;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 20px;
+    background-image: linear-gradient(90deg, 
+    #00e566 0%, 
+    #12d033 62%, 
+    #23ba00 100%), 
+linear-gradient(
+    #f2f2f2, 
+    #f2f2f2);
+    background-blend-mode: normal, 
+        normal;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &:hover{
+        opacity: 0.8;
+    }
+}
+
+.btn-style-2-green{
+    background-image: linear-gradient(90deg, 
+    #00e566 0%, 
+    #12d033 62%, 
+    #23ba00 100%), 
+    linear-gradient(
+        #f2f2f2, 
+        #f2f2f2) !important;
+    // box-shadow: 1px 3px 10px -4px #51ce1a !important;
+}
+.btn-style-2-blue{
+    background-image: linear-gradient(90deg, 
+    #009cff 0%, 
+    #00ccff 100%), 
+    linear-gradient(
+        #000000, 
+        #000000) !important;
+    // box-shadow: 1px 3px 10px -4px #009cff !important;
+}
+.btn-style-2-red{
+	background-image: linear-gradient(90deg, 
+		#f04646 0%, 
+		#f94e4e 100%), 
+	linear-gradient(
+		#000000, 
+		#000000) !important;
+    // box-shadow: 1px 3px 10px -4px #f94e4e !important;
+}
+.btn-style-2-gray{
+    background-image: linear-gradient(-90deg, 
+    #b8b8b8 0%, 
+    #999999 100%), 
+    linear-gradient(
+        #000000, 
+        #000000) !important;
+    // box-shadow: 1px 3px 10px -4px #999999 !important;
+}

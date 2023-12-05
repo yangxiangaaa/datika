@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>答题卡-纸笔考试评阅</title>
+    <link rel="icon" href="../../favicon.ico" />
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
+	<link rel="bookmark" href="../../favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="alert"></div>
+
+</body>
+<script>
+     function getQueryVariable(variable) {
+        var query =
+            window.location.search.substring(1) ||
+            window.location.href.split("?")[1] ||
+            window.location.href;
+
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return pair[1];
+            }
+        }
+        return false;
+    }
+    if ( getQueryVariable("lg_tk")) {
+        localStorage.setItem('token', getQueryVariable("lg_tk"))
+    }
+    let URL850 = '';
+    let URL860 = '';
+    function sendGet(url) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                //获取服务器响应
+
+                JSON.parse(xhr.responseText).Data.map((item) => {
+                    if (item.SysID === '860') {
+                        URL860 = item.WebSvrAddr;
+                    } else if (item.SysID === '850') {
+                        URL850 = item.WebSvrAddr;
+                    }
+                })
+                if (window.location.href.indexOf('localhost:') > -1) {
+                    URL860 = "http://192.168.122.124:22106/Lg_CampusBigData_Application/";
+                    URL850 = "http://192.168.122.124:22106/Lg_CampusBigData_DataCollection/";
+                }
+                if (URL860 && URL850) {
+                    loadScriptOrCss([
+                        URL860 + "/bigData/Common/listen_app_duration_time.js",
+                        JSON.parse(sessionStorage.getItem('PapergradebaseInfo')).BasicWebRootUrl + '/UserMgr/Login/JS/CheckIsOnline2.js',
+                    ]);
+                } else {
+                    loadScriptOrCss([
+                        JSON.parse(sessionStorage.getItem('PapergradebaseInfo')).BasicWebRootUrl + '/UserMgr/Login/JS/CheckIsOnline2.js',
+                    ]);
+                }
+            }
+        };
+        //发送异步请求
+        xhr.open("GET", url, true);
+        //发送请求
+        xhr.send();
+
+    }
+    var tiemr = setInterval(() => {
+        if (sessionStorage.getItem('UserInfo') && sessionStorage.getItem('PapergradebaseInfo')) {
+            clearInterval(tiemr);
+            sendGet(JSON.parse(sessionStorage.getItem('PapergradebaseInfo')).BasicWebRootUrl +
+                '/BaseApi/Global/GetSubSystemsMainServerBySubjectID?appid=361&access_token=f99aa59b30e5fb16507c745300e02725&sysIDs=860,850'
+            );
+        }
+    }, 10)
+
+    var url = window.location.href.split('?')[0].slice(7, window.location.href.split('?')[0].length);
+    var url2 = url.slice(0, url.indexOf('/'));
+
+    //同步引入动态js和css函数
+    function loadScriptOrCss(urlArr, num) {
+        if (!num) {
+            num = 0;
+        }
+        //正则判断是否是css;
+        var reg = RegExp(/.css/);
+
+        if (reg.test(urlArr[num])) {
+            // 动态生成css
+            var scriptOrCss = document.createElement('link');
+            scriptOrCss.type = 'text/css';
+            scriptOrCss.async = 'async';
+            scriptOrCss.href = urlArr[num];
+            scriptOrCss.rel = "stylesheet";
+            document.getElementsByTagName("head")[0].appendChild(scriptOrCss);
+
+        } else {
+            // 动态生成js
+            var scriptOrCss = document.createElement('script');
+            scriptOrCss.type = 'text/javascript';
+            scriptOrCss.async = 'async';
+            scriptOrCss.src = urlArr[num];
+            document.body.appendChild(scriptOrCss);
+        }
+        if (scriptOrCss.readyState) {
+            //IE下
+            scriptOrCss.onreadystatechange = function () {
+                if (scriptOrCss.readyState == 'complete' || scriptOrCss.readyState == 'loaded') {
+                    scriptOrCss.onreadystatechange = null;
+                    num++;
+                    if (num == urlArr.length) {
+                        scriptOrCssSuccessFn();
+                    } else {
+                        if (num == 1) {
+
+
+                        }
+                        loadScriptOrCss(urlArr, num);
+                    }
+                } else {
+
+                }
+            }
+        } else {
+            //其他浏览器
+            scriptOrCss.onload = function () {
+                num++;
+                if (num == urlArr.length) {
+                    scriptOrCssSuccessFn();
+                } else {
+                    if (num == 1) {
+                        // alert(1313);
+
+                    }
+                    loadScriptOrCss(urlArr, num);
+                }
+            }
+        }
+    }
+    function scriptOrCssSuccessFn() {
+        sessionStorage.setItem('PsnMgrLooding', 1);
+        _LgBase_initCheck(JSON.parse(sessionStorage.getItem('PapergradebaseInfo')).BasicWebRootUrl, localStorage.getItem('token'), '361');
+        listenAppDurationTime(URL850, "361", "361002", JSON.parse(
+            sessionStorage.getItem('UserInfo')).UserID)
+    }
+</script>
+</html>

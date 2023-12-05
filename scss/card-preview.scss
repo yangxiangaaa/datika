@@ -1,0 +1,919 @@
+@media print {
+    @page {
+        //   // 纵向
+        //   size: A4 portrait;
+
+        //  // 横向
+        //   size: A3 landscape;
+
+        // 边距
+        margin: 0cm 0cm 0cm 0cm;
+    }
+    body {
+        -webkit-print-color-adjust: exact;
+        -moz-print-color-adjust: exact;
+        -ms-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    button {
+        display: none;
+    }
+}
+.preview-card-container {
+    min-width: 1200px;
+    margin: 0px auto;
+    &.preview {
+        min-width: 0px;
+        margin: 0px;
+        width: 210mm;
+        .answer-content-wrapper {
+            margin: 0;
+            width: auto;
+            padding: 0;
+            display: block;
+        }
+    }
+    &.print {
+        min-width: 0px;
+        margin: 0px;
+        width: 210mm;
+        .answer-content-wrapper {
+            margin: 0;
+            width: auto;
+            padding: 0;
+            display: block;
+        }
+    }
+    .fixed-download-btn {
+        display: inline-block;
+        position: fixed;
+        bottom: 2%;
+        right: 1%;
+        // height: 46px;
+        // width: 46px;
+        border-radius: 50%;
+        // display: -ms-flexbox;
+        // -ms-flex-pack: center;
+        // -ms-flex-align: center;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        color: #ffffff;
+        font-size: 14px;
+        // box-shadow: 1px 3px 10px -4px #51ce1a !important;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        // &:hover {
+        //     opacity: 0.8;
+        // }
+        color: #666;
+        right: 24px;
+        bottom: 34px;
+        // background-color: #fbfbfb;
+        width: 40px;
+        height: 82px;
+        background: #eee;
+        border-radius: 22px;
+        z-index: 3;
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            &:hover {
+                box-shadow: 0px 3px 8px 1px #999;
+            }
+        }
+        span:nth-child(1) {
+            color: green;
+            &:hover {
+                box-shadow: 0px 3px 8px -3px green;
+            }
+            // margin-bottom: 4px;
+        }
+    }
+
+    .answer-content-wrapper {
+        margin: 0 auto;
+        width: 900px;
+        padding: 5mm 0px;
+        display: -ms-flexbox;
+        -ms-flex-pack: center;
+        -ms-flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-color: #c1c7d0;
+        * {
+            box-sizing: border-box;
+        }
+        &.A3-wrapper {
+            width: 1800px;
+            .card-print-wrapper {
+                width: 420mm;
+                display: -ms-flexbox;
+                -ms-flex-pack: start;
+                -ms-flex-wrap: wrap;
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                .answer-sheet-div {
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                }
+            }
+            .answer-sheet-div .page-box .answer-sheet-head .top-nav-div.has-code-bar{
+                .diff-paper-label {
+                    top: 52px;
+                }
+                .basic-info:nth-child(1){
+                    top: 50px;
+                }
+            }
+        }
+        .answer-sheet-div {
+            position: relative;
+            margin: 0px auto;
+            width: 210mm;
+            height: 297mm;
+            background-color: #ffffff;
+            border-radius: 8px;
+            &.display-card-three-columns {
+                width: 140mm;
+                .page-box {
+                    width: 128mm;
+                    left: 22px;
+                    top: 75px;
+                    .answer-sheet-head {
+                        .basic-info > div {
+                            margin-right: 12px;
+                        }
+                        .top-nav-div {
+                            &.has-code-bar {
+                                .basic-info {
+                                    margin-right: 23px !important;
+                                    display: inline-block;
+                                    width: 246px;
+                                    max-width: 42%;
+                                }
+                                .diff-paper-label {
+                                    right: 255px;
+                                    > div {
+                                        // width: 100%;
+                                        i {
+                                            margin-left: 4px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .info-desc-left-div {
+                            font-size: 12px;
+                            .left-content-1 {
+                                // padding: 5px;
+                            }
+                        }
+                        .info-desc-right-div {
+                            min-width: unset;
+                        }
+                        .admission-content {
+                            .bar-code-area {
+                                width: 230px !important;
+                                height: 151px !important;
+                                margin: 6px 0px 0px 20px !important;
+                                line-height: 151px !important;
+                            }
+                            .column-item {
+                                width: 21px !important;
+                                .fill-item-td {
+                                    font-size: 12px !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                .page-footer {
+                    left: 64mm;
+                }
+            }
+            .page-box {
+                position: absolute;
+                top: 75px;
+                left: 38px;
+                width: 191mm;
+                height: 257mm;
+                [class^="position-point"] {
+                    position: absolute;
+                    width: 48px;
+                    height: 8px;
+                    background-color: #000000;
+                }
+                .position-point-1 {
+                    top: -20px;
+                    left: 0px;
+                }
+                .position-point-2 {
+                    top: -20px;
+                    right: 0px;
+                }
+                .position-point-3 {
+                    bottom: -20px;
+                    left: 0px;
+                }
+                .position-point-4 {
+                    bottom: -20px;
+                    right: 0px;
+                }
+                .answer-sheet-title {
+                    min-height: 41px;
+                    line-height: 41px;
+                    font-weight: 600;
+                    font-size: 20px;
+                    text-align: center;
+                    color: #000000;
+                    .ant-input {
+                        text-align: center;
+                        font-size: 20px;
+                        color: rgb(51, 51, 51);
+                        font-weight: bold;
+                    }
+                }
+                .preview-card-title {
+                    min-height: 41px;
+                    line-height: 41px;
+                    font-weight: 600;
+                    font-size: 20px;
+                    text-align: center;
+                    color: #000000;
+                }
+                .answer-sheet-head {
+                    // margin-bottom: 10px;
+                    overflow: hidden;
+                    .top-nav-div {
+                        // display: flex;
+                        &.has-code-bar {
+                            justify-content: space-between;
+                            .basic-info {
+                                width: 414px;
+                                margin-right: 50px;
+                                vertical-align: text-top;
+                                > div {
+                                    margin-right: 0px;
+                                }
+                            }
+                            .basic-info:nth-child(1) {
+                                position: absolute;
+                                top: 49px;
+                                left: 0;
+                            }
+                            .bar-code-area {
+                                margin: 12px 0px 12px 12px;
+                            }
+                            .diff-paper-label {
+                                right: 263px;
+                                top: 12px;
+                                padding: 18px 6px;
+                                height: 152px;
+                                > div {
+                                    padding-bottom: 13px;
+                                }
+                                // display: inline-block;
+                                // min-width: 84px;
+                                // /* margin: 12px; */
+                                // padding: 6px;
+                                // border: 1px solid #e44c5d;
+                                // position: absolute;
+                                // > div {
+                                //     margin-bottom: 10px;
+                                //     text-align: center;
+                                //     i {
+                                //         border: 1px solid #000000;
+                                //         width: 19px;
+                                //         height: 11px;
+                                //         display: inline-block;
+                                //         margin-left: 10px;
+                                //     }
+                                // }
+                            }
+                        }
+                    }
+                    .basic-info {
+                        // display: flex;
+                        // justify-content: center;
+                        // width: 100%;
+                        margin: 15px 0px;
+                        display: inline-block;
+                        width: 48%;
+
+                        > div {
+                            margin-right: 20px;
+                            margin-bottom: 10px;
+                            position: relative;
+                            b {
+                                display: inline-block;
+                                width: calc(100% - 80px);
+                                position: absolute;
+                                top: 20px;
+                                bottom: 0;
+                                border-bottom: 1px solid #333;
+                            }
+                        }
+                    }
+                    .bar-code-area {
+                        width: 230px;
+                        height: 151px;
+                        border: 1px dashed #e44c5d;
+                        display: inline-block;
+                        margin: 6px 0px 0px 20px;
+                        text-align: center;
+                        line-height: 151px;
+                        font-size: 16px;
+                    }
+                    .info-desc {
+                        height: 270px;
+                        box-sizing: border-box;
+                        display: flex;
+                        position: relative;
+                        &-left-div,
+                        &-right-div {
+                            .desc-title {
+                                height: 40px;
+                                line-height: 40px;
+                                text-align: center;
+                                color: #000000;
+                                font-size: 18px;
+                                border: 1px solid #e44c5d;
+                                border-right: none;
+                            }
+                        }
+                        &-left-div {
+                            flex: 1;
+                            font-size: 14px;
+                            .left-content-1 {
+                                position: relative;
+                                border: 1px solid #e44c5d;
+                                border-right: none;
+                                border-top: none;
+                                text-align: left;
+                                // padding: 10px;
+                                line-height: 18px;
+                                height: 133px;
+                                font-size: 12px;
+                                flex-wrap: revert;
+                                .diff-paper-label {
+                                    position: absolute;
+                                    left: 0px;
+                                    bottom: 0px;
+                                    width: 100%;
+                                    padding: 10px;
+                                    border-top: 1px solid #e44c5d;
+                                    > div {
+                                        display: inline-block;
+                                        &:first-child {
+                                            margin-right: 50px;
+                                        }
+                                        i {
+                                            border: 1px solid #000000;
+                                            width: 19px;
+                                            height: 11px;
+                                            display: inline-block;
+                                            margin-left: 10px;
+                                        }
+                                    }
+                                }
+                            }
+                            .left-content-2 {
+                                border: 1px solid #e44c5d;
+                                border-right: none;
+                                border-top: none;
+                                width: 100%;
+                                height: 52px;
+                                padding: 4px 10px;
+                                position: relative;
+                                .line-1 {
+                                    // display: flex;
+                                    justify-content: space-between;
+                                    > div:first-child,
+                                    div:last-child {
+                                        i {
+                                            background: rgb(0, 0, 0);
+                                            width: 19px;
+                                            height: 11px;
+                                            display: inline-block;
+                                            margin-left: 4px;
+                                        }
+                                    }
+                                    > div:last-child:not(:first-child) {
+                                        flex: 1;
+                                        // display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        i {
+                                            border: 1px solid #000000;
+                                            background-color: transparent;
+                                        }
+                                    }
+                                }
+                                .line-2 {
+                                    display: inline-block;
+                                    margin-top: 4px;
+                                    > div {
+                                        i {
+                                            display: inline-block;
+                                            background-image: url("../images/wrong-paint-answer-sheet.png");
+                                            margin-left: 4px;
+                                            vertical-align: -3px;
+                                            height: 15px;
+                                            width: 135px;
+                                            background-size: auto;
+                                            background-repeat: no-repeat;
+                                        }
+                                    }
+                                }
+                            }
+                            .left-content-3 {
+                                border: 1px solid #e44c5d;
+                                border-right: none;
+                                border-top: none;
+                                width: 100%;
+                                height: 45px;
+                                padding: 0 10px;
+                                position: relative;
+                                line-height: 45px;
+                                .line-2 {
+                                    display: inline-block;
+                                    i {
+                                        border: 1px solid #000000;
+                                        width: 19px;
+                                        height: 12px;
+                                        display: inline-block;
+                                        margin-left: 5px;
+                                        position: relative;
+                                        top: 2px;
+                                    }
+                                }
+                            }
+                            .left-content-31 {
+                                position: absolute;
+                                right: 0;
+                                bottom: 1px;
+                                width: 232px;
+                                border-right: 1px solid #e44c5d;
+                                border-top: 1px solid #e44c5d;
+                            }
+                        }
+                        &-right-div {
+                            min-width: 180px;
+                            .desc-title {
+                                border-left: none;
+                                display: flex;
+                                .title {
+                                    flex: 1;
+                                    text-align: center;
+                                }
+                                .edit-btn {
+                                    display: inline-block;
+                                    color: #0090ff;
+                                    font-size: 12px;
+                                    cursor: pointer;
+                                    margin-right: 19px;
+                                    height: 100%;
+                                    transition: all 0.3s;
+                                    &:hover {
+                                        opacity: 0.7;
+                                    }
+                                }
+                            }
+                            .admission-content {
+                                border: 1px solid #e44c5d;
+                                border-top: none;
+                                border-left: none;
+                                height: 230px;
+                                border-right: none;
+                                .admission-number-table {
+                                    display: flex;
+                                    .column-item {
+                                        width: 30px;
+                                        border-right: 1px solid #e44c5d;
+                                        height: 230px;
+                                        &:last-child {
+                                            border-right: none;
+                                        }
+                                        .blank-td {
+                                            height: 40px;
+                                            border-bottom: 1px solid #e44c5d;
+                                        }
+                                        .fill-td-wrapper {
+                                            .fill-item-td {
+                                                margin: 6px auto 0px;
+                                                text-align: center;
+                                                font-size: 14px;
+                                                width: 21px;
+                                                height: 12px;
+                                                line-height: 10px;
+                                                span {
+                                                    &:first-child {
+                                                        margin-right: 1px;
+                                                    }
+                                                    &:last-child {
+                                                        margin-left: 1px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .answer-sheet-content {
+                    .question-out-wrapper {
+                        // overflow: hidden;
+                        .question-title {
+                            position: relative;
+                            width: 100%;
+                            height: 48px;
+                            line-height: 48px;
+                            display: flex;
+                            align-items: center;
+                            font-size: 14px;
+                            color: rgb(0, 0, 0);
+                            &::before {
+                                content: "";
+                                display: inline-block;
+                                height: 20px;
+                                width: 20px;
+                                background-color: #000000;
+                                margin-right: 12px;
+                                vertical-align: middle;
+                            }
+                            .operation-div {
+                                position: absolute;
+                                right: 0px;
+                                font-size: 14px;
+                                top: 12px;
+                                line-height: 14px;
+                                .ant-input {
+                                    width: 50px;
+                                    height: 24px;
+                                    line-height: 24px;
+                                    text-align: center;
+                                }
+                                .edit-btn,
+                                .delete-btn {
+                                    cursor: pointer;
+                                    margin-right: 10px;
+                                    color: #0090ff;
+                                    transition: opacity 0.3s;
+                                    &:hover {
+                                        opacity: 0.8;
+                                    }
+                                }
+                                .delete-btn {
+                                    margin-right: 20px;
+                                }
+                            }
+                        }
+                        .question-list-wrapper {
+                            height: auto;
+                            padding: 0px 10px;
+                            box-sizing: border-box;
+                            border: 1px solid #e44c5d;
+                            color: rgb(0, 0, 0);
+                            margin-left: 16px;
+                            &.no-padding {
+                                padding: 0;
+                            }
+                            .question-groups-wrapper {
+                                display: flex;
+                                flex-wrap: wrap;
+                                .row-list {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    position: relative;
+                                    &.vertical {
+                                        width: 100%;
+                                        .item-position-point {
+                                            display: none;
+                                        }
+                                        .question-group {
+                                            display: flex;
+                                            .question-item {
+                                                height: auto;
+                                                flex-direction: column;
+                                                .question-item-no {
+                                                    margin-bottom: 6px;
+                                                    text-align: center;
+                                                }
+                                                .char-wrapper {
+                                                    flex-direction: column;
+                                                    .char-item {
+                                                        margin-bottom: 9px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .item-position-point {
+                                        position: absolute;
+                                        height: 10px;
+                                        width: 10px;
+                                        left: -26px;
+                                        background-color: #000000;
+                                    }
+                                    .question-group {
+                                        margin: 10px 10px 10px 0px;
+                                        .question-item {
+                                            height: 22px;
+                                            display: flex;
+                                            &-no {
+                                                width: 21px;
+                                                font-size: 13px;
+                                                height: 12px;
+                                                text-align: right;
+                                                margin-right: 4px;
+                                            }
+                                            .char-wrapper {
+                                                display: flex;
+                                                .char-item {
+                                                    width: 21px;
+                                                    display: inline-block;
+                                                    font-size: 13px;
+                                                    height: 12px;
+                                                    position: relative;
+                                                    text-align: right;
+                                                    margin-right: 4px;
+                                                    span {
+                                                        &:first-child {
+                                                            margin-right: 1px;
+                                                        }
+                                                        &:last-child {
+                                                            margin-left: 1px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .judgment-groups-wrapper {
+                                display: flex;
+                                flex-wrap: wrap;
+                                .question-group {
+                                    margin: 10px 10px 10px 0px;
+                                    .question-item {
+                                        height: 22px;
+                                        display: flex;
+                                        &-no {
+                                            width: 21px;
+                                            font-size: 13px;
+                                            height: 12px;
+                                            text-align: right;
+                                            margin-right: 4px;
+                                        }
+                                        .char-wrapper {
+                                            display: flex;
+                                            .char-item {
+                                                width: 21px;
+                                                display: inline-block;
+                                                font-size: 13px;
+                                                height: 12px;
+                                                position: relative;
+                                                text-align: right;
+                                                margin-right: 4px;
+                                                span {
+                                                    &:first-child {
+                                                        margin-right: 1px;
+                                                    }
+                                                    &:last-child {
+                                                        margin-left: 1px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .completion-groups-wrapper {
+                                width: 100%;
+                                padding-bottom: 30px;
+                                .completion-row-wrapper {
+                                    display: flex;
+                                    .completion-question-item {
+                                        flex: 1;
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        .blank-wrapper {
+                                            display: flex;
+                                            flex-shrink: 0;
+                                            .item-no {
+                                                position: relative;
+                                                > span {
+                                                    position: absolute;
+                                                    bottom: 0px;
+                                                    right: 0px;
+                                                }
+                                                width: 30px;
+                                                flex-shrink: 0;
+                                            }
+                                            .blank-item {
+                                                display: inline-block;
+                                                flex: 1;
+                                                height: 1px;
+                                                border-bottom: 1px solid #000000;
+                                                margin-top: 34px;
+                                                margin-right: 10px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .answer-question-wrapper {
+                                .answer-question-item {
+                                    position: relative;
+                                    height: 150px;
+                                    min-height: 35px;
+                                    border-bottom: 1px solid #e44c5d;
+                                    line-height: 35px;
+                                    padding: 0px 10px;
+                                    overflow: hidden;
+                                    &:last-child {
+                                        border-bottom: none;
+                                    }
+                                    .answer-height-input-div {
+                                        display: none;
+                                        padding: 0 2px;
+                                        // background-color: rgba(255, 255, 255, 0.5);
+                                        .answer-Pic {
+                                            display: inline-block;
+                                            i {
+                                                display: inline-block;
+                                                width: 14px;
+                                                height: 14px;
+                                                // background-color: #0090ff;
+                                                background-image: url("../images/uploadImage-i.svg");
+                                                margin-right: 3px;
+                                                vertical-align: text-bottom;
+                                                background-position: center;
+                                                background-repeat: no-repeat;
+                                            }
+                                            color: #0090ff;
+                                            margin-right: 20px;
+                                            cursor: pointer;
+                                            &:hover {
+                                                transform: scale(1.1);
+                                            }
+                                        }
+                                        position: absolute;
+                                        top: 0px;
+                                        right: 6px;
+                                        color: rgb(153, 153, 153);
+                                        font-size: 12px;
+                                        .answer-height-input {
+                                            height: 24px;
+                                            width: 50px;
+                                            line-height: 24px;
+                                            text-align: center;
+                                        }
+                                    }
+                                    &:hover {
+                                        .answer-height-input-div {
+                                            display: inline-block;
+                                        }
+                                    }
+                                }
+                            }
+                            .article-question-wrapper {
+                                padding: 15px 0px 20px;
+                                .article-line {
+                                    height: 40px;
+                                    width: 100%;
+                                    display: flex;
+                                    line-height: 40px;
+                                    u {
+                                        display: inline-block;
+                                        flex: 1;
+                                        height: 1px;
+                                        border-bottom: 1px solid #000000;
+                                        margin-top: 24px;
+                                    }
+                                    &-block {
+                                        flex: 1;
+                                        height: 32px;
+                                        width: 30px;
+                                        border: 1px solid #000000;
+                                        border-left: none;
+                                        &:first-child {
+                                            border-left: 1px solid #000000;
+                                        }
+                                    }
+                                }
+                            }
+                            .comprehensive-question-wrapper {
+                                .comprehensive-question-item {
+                                    border-bottom: 1px solid #e44c5d;
+                                    &:last-child {
+                                        border-bottom: none;
+                                    }
+                                }
+                                .question-groups-wrapper,
+                                .judgment-groups-wrapper,
+                                .completion-groups-wrapper {
+                                    // padding: 0px 10px;
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                }
+                                .question-groups-wrapper,
+                                .judgment-groups-wrapper,
+                                .completion-groups-wrapper,
+                                .answer-question-wrapper {
+                                    font-size: 13px;
+                                }
+                                .item-position-point {
+                                    display: none !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .page-footer {
+                position: absolute;
+                top: 287mm;
+                position: absolute;
+                left: 100mm;
+                font-family: "Microsoft YaHei";
+                color: rgba(0, 0, 0, 0.65);
+                font-size: 3.5mm;
+                .page-index {
+                    span {
+                        &:last-child {
+                            margin-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.admission-edit-modal {
+    width: 400px !important;
+    .content-wrapper {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        display: flex;
+        align-items: center;
+        label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+        }
+        .ant-input {
+            display: inline-block;
+            width: 200px;
+        }
+    }
+}
+
+.delete-file-tip-style {
+    display: inline-block;
+    color: #ff6600;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    vertical-align: -6px;
+    line-height: 24px;
+}
+.diff-paper-label {
+    display: inline-block;
+    width: 50px;
+    /* margin: 12px; */
+    padding: 3px 6px;
+    border: 1px solid #e44c5d;
+    position: absolute;
+    text-align: center;
+    right: 0;
+    div:nth-child(1) {
+        text-align: left;
+        font-size: 12px;
+        position: relative;
+        left: 5px;
+        width: 34px;
+    }
+    div {
+        text-align: center;
+        b {
+            font-weight: normal;
+        }
+    }
+}
+.info-desc-left-div2 {
+    border-right: 1px solid #e44c5d;
+}

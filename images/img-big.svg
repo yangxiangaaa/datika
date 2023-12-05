@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+  <g id="放" transform="translate(-869 -710)">
+    <g id="椭圆_450" data-name="椭圆 450" transform="translate(869 710)" fill="none" stroke="#09f" stroke-width="1">
+      <circle cx="7" cy="7" r="7" stroke="none"/>
+      <circle cx="7" cy="7" r="6.5" fill="none"/>
+    </g>
+    <path id="路径_5001" data-name="路径 5001" d="M-14164-14758h6" transform="translate(15037 15475)" fill="none" stroke="#09f" stroke-linecap="round" stroke-width="1"/>
+    <path id="路径_5002" data-name="路径 5002" d="M-14164-14758h6" transform="translate(-13882 14877.999) rotate(90)" fill="none" stroke="#09f" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>
