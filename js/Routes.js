@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import RootContainer from './containers/index';
 import CardPreviw from './containers/CardPreview';
-import { getQueryVariable } from "../../common/js/fetch";
 
 function Routes (props) {
 

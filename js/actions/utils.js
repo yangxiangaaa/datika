@@ -1,6 +1,6 @@
-import {getData,postData} from "../../../common/js/fetch";
+import {getData,postData} from "../../common/js/fetch";
 
-import config from '../../../common/js/config';
+import config from '../../common/js/config';
 
 
 

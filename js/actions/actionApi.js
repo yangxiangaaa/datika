@@ -1,15 +1,74 @@
-import config from '../../../common/js/config';
+import config from '../../common/js/config';
 
 import { getGetData, getPostData, } from './utils';
-import md5 from '../../../common/js/md5';
+import md5 from '../../common/js/md5';
 
 import commonSettingActions from './commonSettingActions';
+import { QuestionTypeMap, testData } from "../util";
+
+const buildMockQuesStruct = () => {
+    const struct = [];
+    testData.forEach((group) => {
+        const mainGroup = {
+            QuesGroupType: QuestionTypeMap[group.type],
+            QuesGroupName: group.title,
+            LayoutParam: group.showNum,
+            ScoreRule: group.ScoreRule || '',
+            AnswerModel: group.AnswerModel || '',
+            QuesGroupExtraParam: group.QuesGroupExtraParam || '',
+            QuesList: (group.list || []).map((item) => ({
+                QuesNO: item.QuesNO,
+                QuesScore: item.score,
+                QuesExtraParam: item.QuesExtraParam || '',
+                NodeCount: item.optionNum,
+                AnswerHeight: item.optionNum,
+            })),
+        };
+        struct.push(mainGroup);
+        if (group.childQuesGroupList) {
+            group.childQuesGroupList.forEach((child) => {
+                struct.push({
+                    QuesGroupType: QuestionTypeMap[child.type],
+                    QuesGroupName: `${group.title} - ${child.title}`,
+                    LayoutParam: child.showNum,
+                    ScoreRule: child.ScoreRule || '',
+                    AnswerModel: child.AnswerModel || '',
+                    QuesGroupExtraParam: child.QuesGroupExtraParam || '',
+                    QuesList: (child.list || []).map((item) => ({
+                        QuesNO: item.QuesNO,
+                        QuesScore: item.score,
+                        QuesExtraParam: item.QuesExtraParam || '',
+                        NodeCount: item.optionNum,
+                        AnswerHeight: item.optionNum,
+                    })),
+                });
+            });
+        }
+    });
+    return struct;
+};
+
+const mockSheetDetail = {
+    SheetID: 'demo-sheet',
+    SheetName: '示例答题卡',
+    SheetLayout: 1,
+    TicketNOLength: 6,
+    TicketNOProvideType: '1',
+    IsIncludeAB: 0,
+    QuesSortType: 2,
+    SubjectID: 'mock-subject',
+    GradeID: 'mock-grade',
+    QuesStruct: buildMockQuesStruct(),
+};
 
 
 let PaperGradeProxy = config.WebRootUrl;
 
 //获取答题卡详情
 export const GetSheetDetail = async ({SheetID, dispatch}) => {
+    if (config.useMock) {
+        return Promise.resolve({ ...mockSheetDetail, SheetID: SheetID || mockSheetDetail.SheetID });
+    }
     let url = `${PaperGradeProxy}/api/AnswerSheet/GetSheetDetail?SheetID=${SheetID}`;
 
     const res = await getGetData(url, 2, '');
@@ -27,6 +86,13 @@ export const GetSheetDetail = async ({SheetID, dispatch}) => {
 
 //新建答题卡
 export const AddSheet =  async ({ SheetName, SubjectID, SubjectName, GradeID, GlobalGrade, GradeName, TicketNOLength, SheetLayout, TicketNOProvideType, IsIncludeAB, QuesSortType, QuesCoord, QuesStruct, SheetImage='', CreatorID, CreatorName, CreatorIdentity,CreateType=1, Term, SchoolID, dispatch }) => {
+    if (config.useMock) {
+        return {
+            ReturnCode: 200,
+            ResultCode: 0,
+            Data: { SheetID: 'mock-new-sheet', SheetName },
+        };
+    }
 
     let url = `${PaperGradeProxy}/api/AnswerSheet/AddSheet`;
 
@@ -71,6 +137,13 @@ export const AddSheet =  async ({ SheetName, SubjectID, SubjectName, GradeID, Gl
 
 //保存在智能组卷系统中生成的答题卡
 export const SaveSheetInPaperMakeSystem =  async ({ SheetName, UseType, SubjectID, SubjectName, GradeID, GlobalGrade, GradeName, TicketNOLength, SheetLayout, QuesCoord, QuesStruct, CreatorID, CreatorName, CreatorIdentity, Term, SchoolID, dispatch }) => {
+    if (config.useMock) {
+        return {
+            ReturnCode: 200,
+            ResultCode: 0,
+            Data: { SheetID: 'mock-save-sheet', SheetName },
+        };
+    }
 
     let url = `${PaperGradeProxy}/api/AnswerSheet/SaveSheetInPaperMakeSystem`;
 
@@ -115,6 +188,13 @@ export const SaveSheetInPaperMakeSystem =  async ({ SheetName, UseType, SubjectI
 
 //编辑答题卡
 export const EditSheet =  async ({ SheetID, UserID, SheetName, SubjectID, SubjectName, GradeID, GlobalGrade, GradeName, TicketNOLength, SheetLayout, TicketNOProvideType, IsIncludeAB, QuesSortType, QuesCoord, QuesStruct, SheetImage='', dispatch }) => {
+    if (config.useMock) {
+        return {
+            ReturnCode: 200,
+            ResultCode: 0,
+            Data: { SheetID, SheetName },
+        };
+    }
 
     let url = `${PaperGradeProxy}/api/AnswerSheet/EditSheet`;
 
@@ -155,6 +235,13 @@ export const EditSheet =  async ({ SheetID, UserID, SheetName, SubjectID, Subjec
 
 //更新在智能组卷系统中生成的答题卡信息
 export const UpdateSheetInPaperMakeSystem =  async ({ SheetID, UserID, SheetName, SubjectID, SubjectName, GradeID, GlobalGrade, GradeName, TicketNOLength, SheetLayout, QuesCoord, QuesStruct, dispatch }) => {
+    if (config.useMock) {
+        return {
+            ReturnCode: 200,
+            ResultCode: 0,
+            Data: { SheetID, SheetName },
+        };
+    }
 
     let url = `${PaperGradeProxy}/api/AnswerSheet/UpdateSheetInPaperMakeSystem`;
 
@@ -195,6 +282,12 @@ export const UpdateSheetInPaperMakeSystem =  async ({ SheetID, UserID, SheetName
 
 //获取学科信息
 export const GetSchoolSubjectInfo = async ({BaseUrl='', schoolID='', gradeID='', userID='', dispatch}) => {
+    if (config.useMock) {
+        return [
+            { SubjectID: 'mock-subject', SubjectName: '语文' },
+            { SubjectID: 'mock-subject-2', SubjectName: '数学' },
+        ];
+    }
     const { BasicWebServerUrl } = localStorage.getItem("PapergradebaseInfo") ? JSON.parse(localStorage.getItem("PapergradebaseInfo")) : {};
 
     const res = await getGetData(`${BaseUrl ? BaseUrl : BasicWebServerUrl}/BaseApi/UserMgr/TeachInfoMgr/GetSchoolSubjectInfo?appid=361&access_token=f99aa59b30e5fb16507c745300e02725&schoolID=${schoolID}&gradeID=${gradeID}&userID=${userID}`, 2, '');
@@ -212,6 +305,12 @@ export const GetSchoolSubjectInfo = async ({BaseUrl='', schoolID='', gradeID='',
 
 //获取课程(大小学通用)
 export const GetCourseInfo = async ({BaseUrl='',  schoolID='', subjectID='', courseNO='', courseName='', updateTime='', userID='', globalGrade='', collegeID='', majorID='', dispatch}) => {
+    if (config.useMock) {
+        return [
+            { CourseNO: 'C1', CourseName: '高等数学' },
+            { CourseNO: 'C2', CourseName: '大学英语' },
+        ];
+    }
     const { BasicWebServerUrl } = localStorage.getItem("PapergradebaseInfo") ? JSON.parse(localStorage.getItem("PapergradebaseInfo")) : {};
 
     const res = await getGetData(`${BaseUrl ? BaseUrl : BasicWebServerUrl}/BaseApi/UserMgr/TeachInfoMgr/GetCourseInfo?appid=361&access_token=f99aa59b30e5fb16507c745300e02725&schoolID=${schoolID}&subjectID=${subjectID}&courseNO=${courseNO}&courseName=${courseName}&updateTime=${updateTime}&userID=${userID}&globalGrade=${globalGrade}&collegeID=${collegeID}&majorID=${majorID}`, 2, '');
@@ -229,6 +328,12 @@ export const GetCourseInfo = async ({BaseUrl='',  schoolID='', subjectID='', cou
 
 //从基础平台获取年级列表(中小学)
 export const GetGrade = async ({BaseUrl='', gradeID='', schoolID, dispatch}) => {
+    if (config.useMock) {
+        return [
+            { GradeID: 'G1', GradeName: '一年级', GlobalGrade: 1 },
+            { GradeID: 'G2', GradeName: '二年级', GlobalGrade: 2 },
+        ];
+    }
     const { BasicWebServerUrl } = localStorage.getItem("PapergradebaseInfo") ? JSON.parse(localStorage.getItem("PapergradebaseInfo")) : {};
 
     const res = await getGetData(`${BaseUrl ? BaseUrl : BasicWebServerUrl}/BaseApi/UserMgr/UserInfoMgr/GetGrade?appid=361&access_token=f99aa59b30e5fb16507c745300e02725&gradeID=${gradeID}&schoolID=${schoolID}`, 2, '');
@@ -246,6 +351,12 @@ export const GetGrade = async ({BaseUrl='', gradeID='', schoolID, dispatch}) => 
 
 //从基础平台获取年级列表(大学)
 export const GetGrade_Univ = async ({BaseUrl='', gradeID='', schoolID, dispatch}) => {
+    if (config.useMock) {
+        return [
+            { GradeID: 'U1', GradeName: '大一', GlobalGrade: 1 },
+            { GradeID: 'U2', GradeName: '大二', GlobalGrade: 2 },
+        ];
+    }
     const { BasicWebServerUrl } = localStorage.getItem("PapergradebaseInfo") ? JSON.parse(localStorage.getItem("PapergradebaseInfo")) : {};
 
     const res = await getGetData(`${BaseUrl ? BaseUrl : BasicWebServerUrl}/BaseApi/UserMgr/UserInfoMgr/GetGrade_Univ?appid=361&access_token=f99aa59b30e5fb16507c745300e02725&gradeID=${gradeID}&schoolID=${schoolID}`, 2, '');
@@ -263,6 +374,9 @@ export const GetGrade_Univ = async ({BaseUrl='', gradeID='', schoolID, dispatch}
 
 //获取学期
 export const GetTermAndPeriodAndWeekNOInfo = async ( {BaseUrl='', UserID, SchoolID, UserType} ,dispatch ) => {
+    if (config.useMock) {
+        return { ItemTerm: { Term: '2023-2024-1' } };
+    }
     const { BasicWebServerUrl } = localStorage.getItem("PapergradebaseInfo") ? JSON.parse(localStorage.getItem("PapergradebaseInfo")) : {};
     const res = await getGetData(`${BaseUrl ? BaseUrl : BasicWebServerUrl}/BaseApi/UserMgr/TeachInfoMgr/GetTermAndPeriodAndWeekNOInfo?appid=361&access_token=f99aa59b30e5fb16507c745300e02725&userID=${UserID}&schoolID=${SchoolID}&userType=${UserType}`, 2, '');
 

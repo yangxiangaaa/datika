@@ -3,15 +3,15 @@
 import React, { Component, useEffect, useState, useMemo, useReducer, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Scrollbars from 'react-custom-scrollbars';
-import { Modal, Alert } from "../../../common/index";
+import { Modal, Alert } from "../../common";
 import { Input } from "antd";
 
-import { useStateValue } from "../../../common/js/hooks";
+import { useStateValue } from "../../common/js/hooks";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import commonSettingActions from "../actions/commonSettingActions";
 import { GetSheetDetail, SaveSheetInPaperMakeSystem, UpdateSheetInPaperMakeSystem, GetTermAndPeriodAndWeekNOInfo } from "../actions/actionApi";
-import { getQueryVariable } from "../../../common/js/disconnect";
+import { getQueryVariable } from "../../common/js/disconnect";
 import $ from 'jquery';
 import {
     getOneMmsPx,
