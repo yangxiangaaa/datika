@@ -2,11 +2,11 @@ import React, { Component, useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 
-import FrameWork from '../../common/FrameWork';
-import {Alert,Loading} from "../../common";
+import FrameWork from '../common/FrameWork';
+import { Alert, Loading } from "../common";
 import Routes from "./Routes";
 import commonSettingActions from "./actions/commonSettingActions";
-import { getQueryVariable } from "../../common/js/fetch";
+import { getQueryVariable } from "../common/js/disconnect";
 
 
 //使用mock

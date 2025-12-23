@@ -2,14 +2,14 @@
 
 import React, { Component, useEffect, useState, useMemo, useReducer, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Modal, Alert, Empty, Loading, DropDown } from "../../../common/index";
+import { Modal, Alert, Empty, Loading, DropDown } from "../../common";
 import { Input, Button, Switch, Radio, Checkbox, Tooltip } from "antd";
 import Scrollbars from 'react-custom-scrollbars';
 
-import config from '../../../common/js/config';
-import { getQueryVariable } from "../../../common/js/disconnect";
+import config from '../../common/js/config';
+import { getQueryVariable } from "../../common/js/disconnect";
 import commonSettingActions from "../actions/commonSettingActions";
-import { useStateValue } from "../../../common/js/hooks";
+import { useStateValue } from "../../common/js/hooks";
 import {
     testData,
     getOneMmsPx,
